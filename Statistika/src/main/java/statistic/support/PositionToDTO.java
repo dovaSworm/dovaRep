@@ -7,13 +7,13 @@ import java.util.List;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 import statistic.web.dto.PositionDTO;
 @Component
-public class PositionToDTO implements Converter<Pozicija, PositionDTO>{
+public class PositionToDTO implements Converter<PlayingPosition, PositionDTO>{
 
 	@Override
-	public PositionDTO convert(Pozicija p) {
+	public PositionDTO convert(PlayingPosition p) {
 
 		PositionDTO dto = new PositionDTO();
 		dto.setId(p.getId());
@@ -22,9 +22,9 @@ public class PositionToDTO implements Converter<Pozicija, PositionDTO>{
 		return dto;
 	}
 
-	public List<PositionDTO> convert(List<Pozicija> poss){
+	public List<PositionDTO> convert(List<PlayingPosition> poss){
 		ArrayList<PositionDTO> dtos = new ArrayList<>();
-		for(Pozicija p : poss) {
+		for(PlayingPosition p : poss) {
 			dtos.add(convert(p));
 		}
 		return dtos;

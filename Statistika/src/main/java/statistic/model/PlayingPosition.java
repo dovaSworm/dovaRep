@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table
-public class Pozicija {
+public class PlayingPosition {
 
 	@Id
 	@GeneratedValue
@@ -21,18 +21,14 @@ public class Pozicija {
 	private Long id;
 	@Column
 	private String name;
-	@OneToMany(mappedBy="pozicija",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="playingPosition",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Player> players = new ArrayList<>();;
 	
-	public boolean addPlayer(Player p) {
-		if(this.players.size() >= 12) {
-			return false;
-		}
+	public void addPlayer(Player p) {
 		this.players.add(p);
-		if(!this.equals(p.getPosition())){
-			p.setPosition(this);
+		if(!this.equals(p.getPlayingPosition())){
+			p.setPlayingPosition(this);
 		}
-		return true;
 	}
 	public List<Player> getPlayers() {
 		return players;

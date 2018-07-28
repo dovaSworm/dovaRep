@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import statistic.model.Player;
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 import statistic.model.Team;
 import statistic.service.PlayerService;
 import statistic.service.PositionService;
@@ -25,13 +25,13 @@ public class TestData {
 	@PostConstruct
 	public void init() {
 	
-	Pozicija g = new Pozicija();
+	PlayingPosition g = new PlayingPosition();
 	g.setName("guard");
 	poS.save(g);
-	Pozicija f = new Pozicija();
+	PlayingPosition f = new PlayingPosition();
 	f.setName("krilo");
 	poS.save(f);
-	Pozicija c = new Pozicija();
+	PlayingPosition c = new PlayingPosition();
 	c.setName("centar");
 	poS.save(c);
 	for(int i = 1; i < 3; i++) {
@@ -45,8 +45,8 @@ public class TestData {
 		for(int j = 1; j < 5; j++) {
 			Player p = new Player();
 			p.setName("ime igraca " + j);
-			p.setNumber(j);
-			p.setPosition(g);
+			p.setJerseyNumber(j);
+			p.setPlayingPosition(g);
 			p.setTeam(t1);
 			plS.save(p);
 			t1.addPlayer(p);
@@ -55,8 +55,8 @@ public class TestData {
 		for(int j = 5; j <9; j++) {
 			Player p = new Player();
 			p.setName("ime igraca " + j);
-			p.setNumber(j);
-			p.setPosition(f);
+			p.setJerseyNumber(j);
+			p.setPlayingPosition(f);
 			p.setTeam(t1);
 			plS.save(p);
 			t1.addPlayer(p);
@@ -64,8 +64,8 @@ public class TestData {
 		for(int j = 9; j < 13; j++) {
 			Player p = new Player();
 			p.setName("ime igraca " + j);
-			p.setNumber(j);
-			p.setPosition(c);
+			p.setJerseyNumber(j);
+			p.setPlayingPosition(c);
 			p.setTeam(t1);
 			plS.save(p);
 			t1.addPlayer(p);

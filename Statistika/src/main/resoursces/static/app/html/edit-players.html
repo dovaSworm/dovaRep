@@ -1,0 +1,41 @@
+<div ng-controller="editAddPlayerCtrl">
+
+	<form>
+
+		<h2>Add Player OR Choose player to edit</h2>
+		<div class="form-group">
+			<label for="oldPlayer">Players</label> <select ng-model="oldPlayerId"
+				class="form-control" id="oldPlayer">
+				<option ng-repeat="pl in players" value="{{pl.id}}">{{pl.name}}</option>
+			</select>
+			<button type="button" class="btn btn-primary"
+				ng-click="getOldPlayer()">Edit this player</button>
+		</div>
+		<div class="form-group">
+			<label for="name">Name</label> <input class="form-control" id="name"
+				ng-model="newPlayer.name">
+		</div>
+		<div class="form-group">
+			<label for="number">Jersey Number</label> <input class="form-control"
+				id="number" ng-model="newPlayer.jerseyNumber">
+		</div>
+
+		<div class="form-group">
+			<label for="position">Position</label> <select
+				ng-model="newPlayer.positionId" class="form-control" id="position">
+				<option ng-repeat="p in positions" value="{{p.id}}">{{p.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="team">Team</label> <select ng-model="newPlayer.teamId"
+				class="form-control" id="team">
+				<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
+			</select>
+		</div>
+		<button type="button" class="btn btn-primary" ng-click="add()">Add
+			new player</button>
+		<button type="button" class="btn btn-primary" ng-click="edit()">Edit
+			player</button>
+	</form>
+
+</div>

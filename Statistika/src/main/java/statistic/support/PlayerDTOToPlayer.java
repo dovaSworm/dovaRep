@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import statistic.model.Player;
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 import statistic.model.Team;
 import statistic.service.PlayerService;
 import statistic.service.PositionService;
@@ -27,7 +27,7 @@ public class PlayerDTOToPlayer implements Converter<PlayerDTO, Player>{
 	@Override
 	public Player convert(PlayerDTO dto) {
 		Player p;
-		Pozicija pos = posSer.findOne(dto.getPositionId());
+		PlayingPosition pos = posSer.findOne(dto.getPositionId());
 		Team t = tSer.findOne(dto.getTeamId());
 		if(dto.getId() == null) {
 			p = new Player();
@@ -35,25 +35,25 @@ public class PlayerDTOToPlayer implements Converter<PlayerDTO, Player>{
 			p = plSe.findOne(dto.getId());
 		}
 		p.setTeam(t);
-		p.setPosition(pos);
-		p.setAssists(dto.getAssists());
-		p.setBlock(dto.getBlock());
-		p.setFaul(dto.getFaul());
+		p.setPlayingPosition(pos);
+		p.setAssist(dto.getAssist());
+		p.setBlockShot(dto.getBlockShot());
+		p.setPersonalFaul(dto.getPersonalFaul());
 		p.setName(dto.getName());
-		p.setNumber(dto.getNumber());
-		p.setOffRebound(dto.getOffRebound());
-		p.setDefRebound(dto.getDefRebound());
+		p.setJerseyNumber(dto.getJerseyNmber());
+		p.setReboundOff(dto.getReboundOff());
+		p.setReboundDef(dto.getReboundDef());
 		p.setOnePointScore(dto.getOnePointScore());
-		p.setOnePointShoot(dto.getOnePointShoot());
+		p.setOnePointShot(dto.getOnePointShot());
 		p.setSteal(dto.getSteal());
 		p.setThreePointScore(dto.getThreePointScore());
-		p.setThreePointShoot(dto.getThreePointShoot());
+		p.setThreePointShot(dto.getThreePointShot());
 		p.setTurnOver(dto.getTurnOver());
 		p.setTwoPointScore(dto.getTwoPointScore());
-		p.setTwoPointShoot(dto.getTwoPointShoot());
-		p.setOut(dto.isOut());
-		p.setPoeniTotal(dto.getPoeniTotal());
-		p.setSkokTotal(dto.getSkokTotal());
+		p.setTwoPointShot(dto.getTwoPointShot());
+		p.setFouledOut(dto.isFouledOut());
+		p.setTotalPoints(dto.getTotalPoints());
+		p.setTotalRebounds(dto.getTotalRebounds());
 		return p;
 	}
 	

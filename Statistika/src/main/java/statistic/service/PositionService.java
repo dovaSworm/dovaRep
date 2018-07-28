@@ -2,12 +2,12 @@ package statistic.service;
 
 import java.util.List;
 
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 
 public interface PositionService {
 
-	void save(Pozicija p);
+	void save(PlayingPosition p);
 	void delete(Long id);
-	Pozicija findOne(Long id);
-	List<Pozicija> findAll();
+	PlayingPosition findOne(Long id);
+	List<PlayingPosition> findAll();
 }

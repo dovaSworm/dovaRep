@@ -59,14 +59,14 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addOneShot(Long id) {
 		Player p = plRe.findOne(id);
-		p.setOnePointShoot((short) (p.getOnePointShoot() + 1));
+		p.setOnePointShot((p.getOnePointShot() + 1));
 		plRe.save(p);
 	}
 
 	@Override
 	public void addOneScore(Long id) {
 		Player p = plRe.findOne(id);
-		p.setOnePointScore((short) (p.getOnePointScore()+1));
+		p.setOnePointScore((p.getOnePointScore()+1));
 		p.setPoeniTotal(p.getPoeniTotal() + 1);
 		plRe.save(p);
 	}
@@ -74,7 +74,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addTwoShot(Long id) {
 		Player p = plRe.findOne(id);
-		p.setTwoPointShoot((short) (p.getTwoPointShoot() + 1));
+		p.setTwoPointShot((p.getTwoPointShot() + 1));
 		plRe.save(p);
 		
 	}
@@ -82,7 +82,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addTwoScore(Long id) {
 		Player p = plRe.findOne(id);
-		p.setTwoPointScore((short) (p.getTwoPointScore() + 1));
+		p.setTwoPointScore((p.getTwoPointScore() + 1));
 		p.setPoeniTotal(p.getPoeniTotal() + 2);
 		plRe.save(p);
 		
@@ -91,7 +91,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addThreeShot(Long id) {
 		Player p = plRe.findOne(id);
-		p.setThreePointShoot((short) (p.getThreePointShoot() + 1));
+		p.setThreePointShot((p.getThreePointShot() + 1));
 		plRe.save(p);
 		
 	}
@@ -99,7 +99,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addThreeScore(Long id) {
 		Player p = plRe.findOne(id);
-		p.setThreePointScore((short) (p.getThreePointScore() + 1));
+		p.setThreePointScore((p.getThreePointScore() + 1));
 		p.setPoeniTotal(p.getPoeniTotal() + 3);
 		plRe.save(p);
 		
@@ -108,7 +108,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addSteal(Long id) {
 		Player p = plRe.findOne(id);
-		p.setSteal((short) (p.getSteal() + 1));
+		p.setSteal((p.getSteal() + 1));
 		plRe.save(p);
 		
 	}
@@ -116,7 +116,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addTO(Long id) {
 		Player p = plRe.findOne(id);
-		p.setTurnOver((short) (p.getTurnOver() + 1));
+		p.setTurnOver((p.getTurnOver() + 1));
 		plRe.save(p);
 		
 	}
@@ -124,7 +124,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addBlock(Long id) {
 		Player p = plRe.findOne(id);
-		p.setBlock((short) (p.getBlock() + 1));
+		p.setBlockShot((p.getBlockShot() + 1));
 		plRe.save(p);
 		
 	}
@@ -132,8 +132,8 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addOffRebound(Long id) {
 		Player p = plRe.findOne(id);
-		p.setOffRebound((short) (p.getOffRebound() + 1));
-		p.setSkokTotal(p.getSkokTotal() + 1);
+		p.setReboundOff((p.getReboundOff() + 1));
+		p.setTotalRebounds(p.getTotalRebounds() + 1);
 		plRe.save(p);
 		
 	}
@@ -141,8 +141,8 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addDefRebound(Long id) {
 		Player p = plRe.findOne(id);
-		p.setDefRebound((short) (p.getDefRebound() + 1));
-		p.setSkokTotal(p.getSkokTotal() + 1);
+		p.setReboundDef((p.getReboundDef() + 1));
+		p.setTotalRebounds(p.getTotalRebounds() + 1);
 		plRe.save(p);
 		
 	}
@@ -150,7 +150,7 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addAssist(Long id) {
 		Player p = plRe.findOne(id);
-		p.setAssists((short) (p.getAssists() + 1));
+		p.setAssist((p.getAssist() + 1));
 		plRe.save(p);
 		
 	}
@@ -158,9 +158,9 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public void addFaul(Long id) {
 		Player p = plRe.findOne(id);
-		p.setFaul((short) (p.getFaul() + 1));
-		if(p.getFaul() == 5) {
-			p.setOut(true);
+		p.setPersonalFaul((short) (p.getPersonalFaul() + 1));
+		if(p.getPersonalFaul() == 5) {
+			p.setFouledOut(true);
 		}
 		plRe.save(p);
 		

@@ -41,7 +41,8 @@ public class Team {
 			if (!this.equals(p.getTeam())) {
 				p.setTeam(this);
 			}
-		}return true;
+		}
+		return true;
 	}
 
 	public Long getId() {

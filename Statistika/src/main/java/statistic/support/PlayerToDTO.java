@@ -16,27 +16,29 @@ public class PlayerToDTO implements Converter<Player, PlayerDTO>{
 	public PlayerDTO convert(Player p) {
 		
 		PlayerDTO dto = new PlayerDTO();
-		dto.setAssists(p.getAssists());
-		dto.setBlock(p.getBlock());
-		dto.setDefRebound(p.getDefRebound());
-		dto.setFaul(p.getFaul());
+		dto.setAssist(p.getAssist());
+		dto.setBlockShot(p.getBlockShot());
+		dto.setReboundDef(p.getReboundDef());
+		dto.setPersonalFaul(p.getPersonalFaul());
 		dto.setId(p.getId());
 		dto.setName(p.getName());
-		dto.setNumber(p.getNumber());
-		dto.setOffRebound(p.getOffRebound());
+		dto.setJerseyNmber(p.getJerseyNumber());
+		dto.setReboundOff(p.getReboundOff());
 		dto.setOnePointScore(p.getOnePointScore());
-		dto.setOnePointShoot(p.getOnePointShoot());
-		dto.setOut(p.isOut());
-		dto.setPositionId(p.getPosition().getId());
+		dto.setOnePointShot(p.getOnePointShot());
+		dto.setFouledOut(p.isFouledOut());
+		dto.setPositionId(p.getPlayingPosition().getId());
 		dto.setSteal(p.getSteal());
 		dto.setTeamId(p.getTeam().getId());
 		dto.setThreePointScore(p.getThreePointScore());
-		dto.setThreePointShoot(p.getThreePointShoot());
+		dto.setThreePointShot(p.getThreePointShot());
 		dto.setTurnOver(p.getTurnOver());
 		dto.setTwoPointScore(p.getTwoPointScore());
-		dto.setTwoPointShoot(p.getTwoPointShoot());
-		dto.setPoeniTotal(p.getPoeniTotal());
-		dto.setSkokTotal(p.getSkokTotal());
+		dto.setTwoPointShot(p.getTwoPointShot());
+		dto.setTotalPoints(p.getTotalPoints());
+		dto.setTotalRebounds(p.getTotalRebounds());
+		dto.setPositionName(p.getPlayingPosition().getName());
+		dto.setTeamName(p.getTeam().getName());
 		
 		return dto;
 	}

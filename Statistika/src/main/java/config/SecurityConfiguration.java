@@ -14,7 +14,7 @@ import statistic.repository.UsersRepository;
 import statistic.service.impl.CustomUserDetailsService;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableWebSecurity
+//@EnableWebSecurity
 @EnableJpaRepositories(basePackageClasses = UsersRepository.class)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {

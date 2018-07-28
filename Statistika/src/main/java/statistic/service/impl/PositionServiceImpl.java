@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 import statistic.repository.PositionRepository;
 import statistic.service.PositionService;
 @Service
@@ -17,7 +17,7 @@ public class PositionServiceImpl implements PositionService{
 	@Autowired
 	public PositionRepository pRep;
 	@Override
-	public void save(Pozicija p) {
+	public void save(PlayingPosition p) {
 		// TODO Auto-generated method stub
 		pRep.save(p);
 	}
@@ -29,13 +29,13 @@ public class PositionServiceImpl implements PositionService{
 	}
 
 	@Override
-	public Pozicija findOne(Long id) {
+	public PlayingPosition findOne(Long id) {
 		// TODO Auto-generated method stub
 		return pRep.findOne(id);
 	}
 
 	@Override
-	public List<Pozicija> findAll() {
+	public List<PlayingPosition> findAll() {
 		// TODO Auto-generated method stub
 		return pRep.findAll();
 	}

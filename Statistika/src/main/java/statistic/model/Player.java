@@ -20,59 +20,56 @@ public class Player {
 	@Column
 	private String name;
 	@JoinColumn(name = "team_id")
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Team team;
 	@Column
-	private int broj;
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Pozicija pozicija;
+	private int jerseyNumber;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private PlayingPosition playingPosition;
 	@Column
-	private int onePointShoot;
+	private int onePointShot;
 	@Column
 	private int onePointScore;
 	@Column
-	private int twoPointShoot;
+	private int twoPointShot;
 	@Column
 	private int twoPointScore;
 	@Column
-	private int threePointShoot;
+	private int threePointShot;
 	@Column
 	private int threePointScore;
 	@Column
-	private int asistencije;
+	private int assist;
 	@Column
-	private int ukradene;
+	private int steal;
 	@Column
-	private int izgubljene;
+	private int turnOver;
 	@Column
-	private int skokNapad;
+	private int reboundOff;
 	@Column
-	private int skokOdbrana;
+	private int reboundDef;
 	@Column
-	private int rampa;
+	private int blockShot;
 	@Column
-	private int licna;
+	private int personalFaul;
 	@Column
-	private boolean iskljucen = false;
+	private boolean fouledOut = false;
 	@Column
-	private int poeniTotal;
+	private int totalPoints;
 	@Column
-	private int skokTotal = skokOdbrana + skokNapad;
+	private int totalRebounds;
+
 	public int getPoeniTotal() {
-		return poeniTotal;
+		return totalPoints;
 	}
+
 	public void setPoeniTotal(int poeniTotal) {
-		this.poeniTotal = poeniTotal;
+		this.totalPoints = poeniTotal;
 	}
-	public int getSkokTotal() {
-		return skokTotal;
-	}
-	public void setSkokTotal(int skokTotal) {
-		this.skokTotal = skokTotal;
-	}
+
 	public void fouledOut() {
-		if(this.licna == 5) {
-			this.iskljucen = true;
+		if (this.personalFaul == 5) {
+			this.fouledOut = true;
 		}
 	}
 
@@ -98,36 +95,28 @@ public class Player {
 
 	public void setTeam(Team team) {
 		this.team = team;
-		if(team!=null && !team.getPlayers().contains(this)){
+		if (team != null && !team.getPlayers().contains(this)) {
 			team.getPlayers().add(this);
 		}
 	}
 
-	public int getNumber() {
-		return broj;
+	public PlayingPosition getPlayingPosition() {
+		return playingPosition;
 	}
 
-	public void setNumber(int number) {
-		this.broj = number;
-	}
-
-	public Pozicija getPosition() {
-		return pozicija;
-	}
-
-	public void setPosition(Pozicija position) {
-		this.pozicija = position;
-		if(position!=null && !position.getPlayers().contains(this)){
+	public void setPlayingPosition(PlayingPosition position) {
+		this.playingPosition = position;
+		if (position != null && !position.getPlayers().contains(this)) {
 			position.getPlayers().add(this);
 		}
 	}
 
 	public int getOnePointShoot() {
-		return onePointShoot;
+		return onePointShot;
 	}
 
-	public void setOnePointShoot(int onePointShoot) {
-		this.onePointShoot = onePointShoot;
+	public void setOnePointShot(int onePointShot) {
+		this.onePointShot = onePointShot;
 	}
 
 	public int getOnePointScore() {
@@ -139,11 +128,11 @@ public class Player {
 	}
 
 	public int getTwoPointShoot() {
-		return twoPointShoot;
+		return twoPointShot;
 	}
 
-	public void setTwoPointShoot(int twoPointShoot) {
-		this.twoPointShoot = twoPointShoot;
+	public void setTwoPointShot(int twoPointShot) {
+		this.twoPointShot = twoPointShot;
 	}
 
 	public int getTwoPointScore() {
@@ -154,12 +143,12 @@ public class Player {
 		this.twoPointScore = twoPointScore;
 	}
 
-	public int getThreePointShoot() {
-		return threePointShoot;
+	public int getThreePointShot() {
+		return threePointShot;
 	}
 
-	public void setThreePointShoot(int threePointShoot) {
-		this.threePointShoot = threePointShoot;
+	public void setThreePointShoot(int threePointShot) {
+		this.threePointShot = threePointShot;
 	}
 
 	public int getThreePointScore() {
@@ -170,70 +159,104 @@ public class Player {
 		this.threePointScore = threePointScore;
 	}
 
-	public int getAssists() {
-		return asistencije;
-	}
-
-	public void setAssists(int assists) {
-		this.asistencije = assists;
-	}
-
 	public int getSteal() {
-		return ukradene;
+		return steal;
 	}
 
 	public void setSteal(int steal) {
-		this.ukradene = steal;
+		this.steal = steal;
+	}
+
+	public int getJerseyNumber() {
+		return jerseyNumber;
+	}
+
+	public void setJerseyNumber(int jerseyNumber) {
+		this.jerseyNumber = jerseyNumber;
+	}
+
+	public int getAssist() {
+		return assist;
+	}
+
+	public void setAssist(int assist) {
+		this.assist = assist;
 	}
 
 	public int getTurnOver() {
-		return izgubljene;
+		return turnOver;
 	}
 
 	public void setTurnOver(int turnOver) {
-		this.izgubljene = turnOver;
+		this.turnOver = turnOver;
 	}
 
-	public int getOffRebound() {
-		return skokNapad;
+	public int getReboundOff() {
+		return reboundOff;
 	}
 
-	public void setOffRebound(int offRebound) {
-		this.skokNapad = offRebound;
+	public void setReboundOff(int reboundOff) {
+		this.reboundOff = reboundOff;
 	}
 
-	public int getDefRebound() {
-		return skokOdbrana;
+	public int getReboundDef() {
+		return reboundDef;
 	}
 
-	public void setDefRebound(int defRebound) {
-		this.skokOdbrana = defRebound;
+	public void setReboundDef(int reboundDef) {
+		this.reboundDef = reboundDef;
 	}
 
-	public int getBlock() {
-		return rampa;
+	public int getBlockShot() {
+		return blockShot;
 	}
 
-	public void setBlock(int block) {
-		this.rampa = block;
+	public void setBlockShot(int blockShot) {
+		this.blockShot = blockShot;
 	}
 
-	public int getFaul() {
-		return licna;
+	public int getPersonalFaul() {
+		return personalFaul;
 	}
 
-	public void setFaul(int faul) {
-		
-		this.licna = faul;
+	public void setPersonalFaul(int personalFaul) {
+		this.personalFaul = personalFaul;
 	}
 
-	public boolean isOut() {
-		return iskljucen;
+	public boolean isFouledOut() {
+		return fouledOut;
 	}
 
-	public void setOut(boolean out) {
-		this.iskljucen = out;
+	public void setFouledOut(boolean excpelled) {
+		this.fouledOut = excpelled;
 	}
-	
-	
+
+	public int getTotalPoints() {
+		return totalPoints;
+	}
+
+	public void setTotalPoints(int totalPoints) {
+		this.totalPoints = totalPoints;
+	}
+
+	public int getTotalRebounds() {
+		return totalRebounds;
+	}
+
+	public void setTotalRebounds(int totalRebounds) {
+		this.totalRebounds = totalRebounds;
+	}
+
+	public int getOnePointShot() {
+		return onePointShot;
+	}
+
+	public int getTwoPointShot() {
+		return twoPointShot;
+	}
+
+	public void setThreePointShot(int threePointShot) {
+		this.threePointShot = threePointShot;
+	}
+
 }

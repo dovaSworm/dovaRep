@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import statistic.model.Pozicija;
+import statistic.model.PlayingPosition;
 import statistic.service.PositionService;
 import statistic.support.PositionToDTO;
 import statistic.support.PositonDTOToPosition;
@@ -38,7 +38,7 @@ public class PositionController {
 		public ResponseEntity<PositionDTO> get(
 				@PathVariable Long id){
 			
-			Pozicija p = pSer.findOne(id);
+			PlayingPosition p = pSer.findOne(id);
 			
 			if(p == null){
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class PositionController {
 		public ResponseEntity<PositionDTO> add(
 				@Validated @RequestBody PositionDTO newPosition){
 			
-			Pozicija p = toPosition.convert(newPosition); 
+			PlayingPosition p = toPosition.convert(newPosition); 
 			pSer.save(p);
 			
 			return new ResponseEntity<>(toDTO.convert(p),
@@ -70,7 +70,7 @@ public class PositionController {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			
-			Pozicija p = toPosition.convert(izmenjen); 
+			PlayingPosition p = toPosition.convert(izmenjen); 
 			pSer.save(p);
 			
 			return new ResponseEntity<>(toDTO.convert(p),

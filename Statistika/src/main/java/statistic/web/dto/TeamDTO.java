@@ -7,6 +7,7 @@ public class TeamDTO {
 	private String coach;
 	private String country;
 	private String city;
+	
 	public Long getId() {
 		return id;
 	}
