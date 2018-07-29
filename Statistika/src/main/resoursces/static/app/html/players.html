@@ -124,8 +124,8 @@ rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steal
 					title="{{p.name}} <br /> 
 1p {{p.onePointShot}}/{{p.onePointScore}} 2p {{p.twoPointShot}}/{{p.twoPointScore}} 3p {{p.threePointShot}}/{{p.threePointScore}} <br /> 
 rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steals {{p.steal}} rampe {{p.blockShot}}">{{p.name}}</td>
-				<td>{{p.poeniTotal}}</td>
-				<td>{{p.positionId}}</td>
+				<td>{{p.totalPoints}}</td>
+				<td>{{p.positionName}}</td>
 				<td><button id="proba" ng-click="point1Shot(p.id)"
 						class="btn btn-danger" ng-disabled="p.out == true">1s</button></td>
 				<td><button id="proba" ng-click="point1Score(p.id)"

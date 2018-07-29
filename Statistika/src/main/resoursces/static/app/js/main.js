@@ -229,13 +229,15 @@ statisticApp.controller("playersCtrl", function($scope, $http, $location) {
 				});
 
 	}
+	
+	$(function () {
+		$("body").tooltip({
+			selector: '[data-toggle="tooltip"]',
+			container: 'body'
+		});
+	})
 
-    $(function () {
-        $("body").tooltip({
-            selector: '[data-toggle="tooltip"]',
-            container: 'body',
-        });
-    })
+    
 });
 /////////////////////////dodavanje i editovanje igraca/////////////////////////////////////////////
 statisticApp.controller("editAddPlayerCtrl", function($scope, $http,
@@ -343,7 +345,7 @@ statisticApp.controller("editAddPlayerCtrl", function($scope, $http,
 	};
 	
 	$scope.edit = function() {
-		$http.put(baseUrlPlayers + "/" + $scope.oldPlayerId,
+		$http.put(baseUrlPlayers + "/protectedByUserRole/" + $scope.oldPlayerId,
 				$scope.newPlayer).then(function success(data) {
 			alert("Successfull editing!");
 			$location.path("/");
