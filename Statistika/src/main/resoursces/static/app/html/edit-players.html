@@ -1,41 +1,76 @@
 <div ng-controller="editAddPlayerCtrl">
+<div id="forHeader"></div>
+	<div id="forPlayerForm">
 
-	<form>
+		<form>
+			<h2>Add new or edit player</h2>
+			<div class="form-group">
+				<label for="oldPlayer">Players</label> <select 
+					ng-model="oldPlayerId" class="form-control" id="oldPlayer">
+					<option data-ng-scroll-up="go(1)" data-ng-scroll-down="go(-1)" id="forScroll" ng-repeat="pl in players" value="{{pl.id}}">{{pl.name}}</option>
+				</select>
+				<button type="button" class="btn btn-primary"
+					ng-click="getOldPlayer()">Edit this player</button>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label> <input class="form-control" id="name"
+					ng-model="newPlayer.name">
+			</div>
+			<div class="form-group">
+				<label for="number">Jersey Number</label> <input
+					class="form-control" id="number" ng-model="newPlayer.jerseyNmber">
+			</div>
 
-		<h2>Add Player OR Choose player to edit</h2>
-		<div class="form-group">
-			<label for="oldPlayer">Players</label> <select ng-model="oldPlayerId"
-				class="form-control" id="oldPlayer">
-				<option ng-repeat="pl in players" value="{{pl.id}}">{{pl.name}}</option>
-			</select>
-			<button type="button" class="btn btn-primary"
-				ng-click="getOldPlayer()">Edit this player</button>
-		</div>
-		<div class="form-group">
-			<label for="name">Name</label> <input class="form-control" id="name"
-				ng-model="newPlayer.name">
-		</div>
-		<div class="form-group">
-			<label for="number">Jersey Number</label> <input class="form-control"
-				id="number" ng-model="newPlayer.jerseyNumber">
-		</div>
+			<div class="form-group">
+				<label for="position">Position</label> <select
+					ng-model="newPlayer.positionId" class="form-control" id="position" autofocus>
+					<option ng-repeat="p in positions" value="{{p.id}}">{{p.name}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="team">Team</label> <select ng-model="newPlayer.teamId"
+					class="form-control" id="team">
+					<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
+				</select>
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="addPlayer()">Add
+				new player</button>
+			<button type="button" class="btn btn-primary" ng-click="edit()">Edit
+				player</button>
+		</form>
 
+	</div>
+	<div id="forTeamForm">
+	<h2>Add new or edit team</h2>
+	
+	<div class="form-group">
+				<label for="oldTeam">Teams</label> <select
+					ng-model="oldTeamId" class="form-control" id="oldTeam">
+					<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
+				</select>
+				<button type="button" class="btn btn-primary"
+					ng-click="getOldTeam()">Edit this team</button>
+			</div>
 		<div class="form-group">
-			<label for="position">Position</label> <select
-				ng-model="newPlayer.positionId" class="form-control" id="position">
-				<option ng-repeat="p in positions" value="{{p.id}}">{{p.name}}</option>
-			</select>
+			<label for="nameForTeam">Name</label> <input class="form-control"
+				id="nameForTeam" ng-model="newTeam.name">
 		</div>
 		<div class="form-group">
-			<label for="team">Team</label> <select ng-model="newPlayer.teamId"
-				class="form-control" id="team">
-				<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
-			</select>
+			<label for="cityForTeam">City</label> <input class="form-control"
+				id="cityForTeam"
+				ng-model="newTeam.city">
 		</div>
-		<button type="button" class="btn btn-primary" ng-click="add()">Add
-			new player</button>
-		<button type="button" class="btn btn-primary" ng-click="edit()">Edit
-			player</button>
-	</form>
-
-</div>
+		<div class="form-group">
+			<label for="countryForTeam">Country</label> <input
+				class="form-control" id="countryForTeam" ng-model="newTeam.country">
+		</div>
+		<div class="form-group">
+			<label for="coachForTeam">Coach</label> <input class="form-control"
+				id="coachForTeam" ng-model="newTeam.coach">
+		</div>
+				<br/>
+		<button type="button" class="btn btn-primary" ng-click="addTeam()">Add
+				new team</button>
+			<button type="button" class="btn btn-primary" ng-click="editTeam()">Edit
+				Team</button>
+	</div>

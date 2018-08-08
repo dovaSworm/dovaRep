@@ -1,5 +1,8 @@
 package statistic.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import statistic.model.BallGame;
 import statistic.model.Player;
+import statistic.model.PlayerInGame;
 import statistic.model.Team;
+import statistic.repository.BallGameRepository;
+import statistic.repository.PlayerInGameRepository;
 import statistic.repository.PlayerRepository;
 import statistic.repository.TeamRepositiry;
 import statistic.service.PlayerService;
+import statistic.web.dto.PlayerInGameDTO;
 @Service
 @Transactional
 public class PlayerServiceImpl implements PlayerService{
@@ -20,6 +28,10 @@ public class PlayerServiceImpl implements PlayerService{
 	PlayerRepository plRe;
 	@Autowired
 	TeamRepositiry tr;
+	@Autowired
+	private PlayerInGameRepository inGameR;
+	@Autowired
+	private BallGameRepository bgR;
 	@Override
 	public boolean save(Player p) {
 
@@ -56,120 +68,47 @@ public class PlayerServiceImpl implements PlayerService{
 				new PageRequest(pageNum, 5));
 	}
 
-	@Override
-	public void addOneShot(Long id) {
-		Player p = plRe.findOne(id);
-		p.setOnePointShot((p.getOnePointShot() + 1));
-		plRe.save(p);
-	}
+//	@Override
+//	public List<PlayerInGame> findByTeamId(Long teamId) {
+//		// TODO Auto-generated method stub
+//		List<Player> players = plRe.findByTeamId(teamId);
+//		List<PlayerInGame> inGamePlayers= new ArrayList<>();
+//		for(Player p : players) {
+//			PlayerInGame playerInGame;
+//			if(inGameR.findByPlayerId(p.getId()) == null) {
+//				playerInGame = new PlayerInGame(p);
+//				inGameR.save(playerInGame);
+//				inGamePlayers.add(playerInGame);
+//			}else {
+//				playerInGame = inGameR.findByPlayerId(p.getId());
+//				inGamePlayers.add(playerInGame);
+//			}
+//			
+//		}
+//		return inGamePlayers;
+//	}
 
 	@Override
-	public void addOneScore(Long id) {
-		Player p = plRe.findOne(id);
-		p.setOnePointScore((p.getOnePointScore()+1));
-		p.setPoeniTotal(p.getPoeniTotal() + 1);
-		plRe.save(p);
-	}
-
-	@Override
-	public void addTwoShot(Long id) {
-		Player p = plRe.findOne(id);
-		p.setTwoPointShot((p.getTwoPointShot() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addTwoScore(Long id) {
-		Player p = plRe.findOne(id);
-		p.setTwoPointScore((p.getTwoPointScore() + 1));
-		p.setPoeniTotal(p.getPoeniTotal() + 2);
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addThreeShot(Long id) {
-		Player p = plRe.findOne(id);
-		p.setThreePointShot((p.getThreePointShot() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addThreeScore(Long id) {
-		Player p = plRe.findOne(id);
-		p.setThreePointScore((p.getThreePointScore() + 1));
-		p.setPoeniTotal(p.getPoeniTotal() + 3);
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addSteal(Long id) {
-		Player p = plRe.findOne(id);
-		p.setSteal((p.getSteal() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addTO(Long id) {
-		Player p = plRe.findOne(id);
-		p.setTurnOver((p.getTurnOver() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addBlock(Long id) {
-		Player p = plRe.findOne(id);
-		p.setBlockShot((p.getBlockShot() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addOffRebound(Long id) {
-		Player p = plRe.findOne(id);
-		p.setReboundOff((p.getReboundOff() + 1));
-		p.setTotalRebounds(p.getTotalRebounds() + 1);
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addDefRebound(Long id) {
-		Player p = plRe.findOne(id);
-		p.setReboundDef((p.getReboundDef() + 1));
-		p.setTotalRebounds(p.getTotalRebounds() + 1);
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addAssist(Long id) {
-		Player p = plRe.findOne(id);
-		p.setAssist((p.getAssist() + 1));
-		plRe.save(p);
-		
-	}
-
-	@Override
-	public void addFaul(Long id) {
-		Player p = plRe.findOne(id);
-		p.setPersonalFaul((short) (p.getPersonalFaul() + 1));
-		if(p.getPersonalFaul() == 5) {
-			p.setFouledOut(true);
+	public void makePlayersInGame(BallGame bg) {
+		List<Player> hostPlayers = plRe.findByTeamId(bg.getHost().getId());
+		List<Player> guestPlayers = plRe.findByTeamId(bg.getGuest().getId());
+//		BallGame bg = bgR.findOne(gameId);
+//		List<PlayerInGame> inGamePlayers= new ArrayList<>();
+		for(Player p : hostPlayers) {
+			PlayerInGame playerInGame = new PlayerInGame(p);
+			playerInGame.setGame(bg);
+			inGameR.save(playerInGame);
+//			inGamePlayers.add(playerInGame);
 		}
-		plRe.save(p);
+		for(Player p : guestPlayers) {
+			PlayerInGame playerInGame = new PlayerInGame(p);
+			playerInGame.setGame(bg);
+			inGameR.save(playerInGame);
+//			inGamePlayers.add(playerInGame);
+		}
 		
+//		return inGamePlayers;
 	}
 
-	@Override
-	public Page<Player> findByTeamId(int pageNum, Long teamId) {
-		// TODO Auto-generated method stub
-		return plRe.findByTeamId(teamId, new PageRequest(pageNum, 12));
-	}
 
 }

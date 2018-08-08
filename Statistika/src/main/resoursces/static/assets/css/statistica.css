@@ -4,17 +4,44 @@
      width: 160px;
 }
 
+#addGameButton{background-color: #00ff80;}
 
-.mojH1 {color: red}
-#teamA { width: 200px}
-#teamB { width: 200px}
+#experiment {
+	height:1000px;
+	width: 100px;
+	position: absolute;
+	left:2px;
+	border: 3px solid black;
+	background: url("/assets/img/vertikalna_uzarena.jpg");
+	background-size: contain;
+	background-color: #ffff00;}
+#teamHost { width: 100px;
+
+}
+#divHost{
+	background: url("/assets/img/koza_krupnije.jpg");
+}
+#teamGuest { width: 100px;background: url("/assets/img/koza_krupnije.jpg");}
 #proba{
 	padding: 1px 1px;
 	font-size: 11px;
 	line-height: 12px;
 	width: 30px;
 }
-
+#myAlert{
+	position: absolute;
+}
+#reset{
+	position: relative;
+	right: 300px;
+	display: inline-block;
+	left: 100px;
+	
+}
+#result{
+	border: 3px solid black;
+	position: absolute;
+}
 #proba1{
 	padding: 1px 1px;
 	font-size: 11px;
@@ -23,12 +50,34 @@
 	color: black;
 	background-color: #ffff00;
 }
+#forHostTable{
+	
+}
 
+#forTeamForm{
+	left: 350px;
+	width: 300px;
+	position: relative;
+}
+#forPlayerForm{
+	left: 350px;
+	top: 50px;
+	width: 300px;
+	position: absolute;
+}
+#forHeader{
+	height:50px;
+	background: url("/assets/img/lopta_plamen_crnobelo.jpg");
+	background-size: contain;
+    background-repeat: repeat;
+     text-align: center;
+     font-size: 40px;
+}
 
 #mytable >tbody>tr>td{
   height:15px;
   padding:2px;
-   text-align: center;
+  text-align: center;
 }
 
 #mytable >thead>tr>th{

@@ -1,0 +1,8 @@
+DROP DATABASE IF EXISTS statistic;
+CREATE DATABASE statistic DEFAULT CHARACTER SET utf8;
+
+USE statistic;
+
+GRANT ALL ON statistic.* TO 'dova'@'%' IDENTIFIED BY 'dova';
+
+FLUSH PRIVILEGES;

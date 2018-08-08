@@ -3,7 +3,6 @@ package statistic.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,17 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import statistic.model.Player;
+import statistic.model.PlayerInGame;
 import statistic.model.Team;
+import statistic.repository.PlayerRepository;
+import statistic.service.PlayerInGameService;
 import statistic.service.PlayerService;
 import statistic.service.TeamService;
+import statistic.support.PlayerInGameToDTO;
 import statistic.support.PlayerToDTO;
 import statistic.support.TeamDTOToTeam;
 import statistic.support.TeamToDTO;
 import statistic.web.dto.PlayerDTO;
+import statistic.web.dto.PlayerInGameDTO;
 import statistic.web.dto.TeamDTO;
 
 @RestController
@@ -37,7 +40,11 @@ public class TeamController {
 	@Autowired
 	private PlayerToDTO toPlayerDTO;
 	@Autowired
-	private PlayerService plSer;
+	private PlayerRepository plR;
+	@Autowired
+	private PlayerInGameService inGameS;
+	@Autowired
+	private PlayerInGameToDTO inGameToDTO;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<TeamDTO>> get(){
@@ -95,13 +102,13 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value="/{teamId}/players")
-	public ResponseEntity<List<PlayerDTO>> findByTeamId(
-			@PathVariable Long teamId,
-			@RequestParam(defaultValue="0") int pageNum){
-		Page<Player> players = plSer.findByTeamId(pageNum, teamId);
+	public ResponseEntity<List<PlayerDTO>> findByPlayersTeamId(
+			@PathVariable Long teamId){
+		List<Player> players = plR.findByTeamId(teamId);
 		
 		return  new ResponseEntity<>(
-				toPlayerDTO.convert(players.getContent()),
+				toPlayerDTO.convert(players),
 				HttpStatus.OK);
 	}
+	
 }
