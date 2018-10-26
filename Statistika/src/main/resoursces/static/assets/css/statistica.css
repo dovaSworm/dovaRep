@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Charmonman');
 #addGameButton{
 	background: url("/assets/img/duel.png");
 	background-size: 150px 150px;
@@ -139,31 +139,43 @@
 	height: 800px;
 	top:50px;
 }
-/*    add and edit page    */
+/* ====================   add and edit page =======================================================================   */
+
+#divBackEdit{
+	position: absolute;
+	left: 0;
+	top : 50px;
+	bottom: 0;
+	right: 0;
+	width: 100%;
+	background: url("/assets/img/parket.jpg");
+	z-index: 1;
+}
 
 .my-input{
 	width: 180px;
 	
 }
 #sectionTeam{
-	position: realtive;
-	width: 45%;
+	position: absolute;
+	width: 35%;
 	top: 100px;	
-	
+	right: 15%;
 }
 #sectionPlayer{
-	position: realtive;
+	left: 15%;
+	position: absolute;
 	top: 100px;
-	width: 45%;
+	width: 35%;
 }
 #playerEditHeader{
-	
 	display: inline;
 	width: auto;
 	position: realtive;
 }
 #teamEditHeader{
-	
+	font-family: 'Charmonman', cursive;
+	font-weight: bold;
 	display: inline;
 	width: auto;
 	position: realative;
