@@ -1,4 +1,4 @@
-# dovaRep
+# Basketball statistic
 
 # Statictic for basketball game. CRUD operations on players, teams and games. Changing player statistics trough javacsript UI. Javascript framework is AngularJS. Saving records for all games in database(MySQL) with hibernate. UI enrichment with JQuery and bootstrap.
 # Single page application. Maven build tool, framework spring boot , mvc patern.
