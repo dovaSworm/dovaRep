@@ -176,11 +176,10 @@
 						alert("Unsuccessful change")
 					});
   
- # this is html code where we get value of param:
+ # This is html code where we get value of param. It is a table with all players from team(guest or host):
   
 	  <tr style="height: 10px" ng-repeat="p in guestPlayers">
 					<td>{{p.jerseyNmber}}</td>
- # this tooltip apears on hover over players name and give full stat of player in real time
 					<td data-toggle="tooltip" data-html="true"
 						title="{{p.name}} <br /> 
 	1p {{p.onePointShot}}/{{p.onePointScore}} 2p {{p.twoPointShot}}/{{p.twoPointScore}} 3p {{p.threePointShot}}/{{p.threePointScore}} <br /> 
@@ -195,6 +194,11 @@
 							class="btn btn-danger" ng-disabled="p.out == true">2s</button></td>
 		    // rest of code
 
+#   This tooltip apears on hover over players name and give full stat of player in real time
+					<td data-toggle="tooltip" data-html="true"
+						title="{{p.name}} <br /> 
+	1p {{p.onePointShot}}/{{p.onePointScore}} 2p {{p.twoPointShot}}/{{p.twoPointScore}} 3p {{p.threePointShot}}/{{p.threePointScore}} <br /> 
+	rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steals {{p.steal}} rampe {{p.blockShot}}">{{p.name}}</td> 
             
  # String that we send trough params is determinat which attribute we change in service:
   
@@ -264,4 +268,84 @@
 		}
 	  }
 
- 
+# Result is automatically changed by changing individual players statistic
+	
+	var result = function() {
+		$http.get(baseUrlBallGame + "/result/" + $scope.ballGame.id).then(
+				function success(res) {
+					$scope.ballGame = res.data;
+				}, function error(data) {
+					alert("Unsuccessful $scope.result geting.");
+				});
+
+	};
+	
+	$scope.change = function(id,string) {
+		var config = {
+				params : {}
+		};
+		if (string != "") {
+			config.params.action = string;
+		}
+		$http.get(baseUrlPlayersInGame + "/" + id+ "/change", config).then(
+				function success(res) {
+					$scope.playerForUndo = res.data;
+					console.log(string);
+					console.log(config.params.action);
+					result();
+					getHostPlayers();
+					getGuestPlayers();
+				}, function error(res) {
+					alert("Unsuccessful change")
+				});
+		
+	}
+	
+	@Service
+	@Transactional
+	public class BallGameServiceImpl implements BallGameService {
+
+	@Autowired
+	private BallGameRepository ballgameRepository;
+	@Autowired
+	private TeamRepositiry teamRepositry;
+	@Autowired
+	private PlayerInGameService playerInGameService;
+	@Autowired
+	private PlayerService playerService;
+	
+	// here we culculate result in game
+	@Override
+	public BallGame result(Long id) {
+
+		BallGame bg = findOne(id);
+		int hostPoints = bg.getHostPlayers().stream().mapToInt(PlayerInGame::getTotalPoints).sum();
+		int guestPoints = bg.getGuestPlayers().stream().mapToInt(PlayerInGame::getTotalPoints).sum();
+
+		bg.setGuestPoints(guestPoints);
+		bg.setHostPoints(hostPoints);
+		
+		return bg;
+
+	}
+	}
+	
+	// here  method above is called
+	
+	@RestController
+	@RequestMapping("/api/ballGame")
+	public class BallGameController {
+
+	@Autowired
+	private BallGameService ballgameService;
+	@Autowired
+	private BallGameToDTO toDTO;
+	@Autowired
+	private BallGameDTOToBallGame toGame;
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/result/{id}")
+	public ResponseEntity<BallGameDTO> result(@PathVariable Long id) {
+		BallGame bg = ballgameService.result(id);
+		return new ResponseEntity<>(toDTO.convert(bg), HttpStatus.OK);
+	}
+ 	}
