@@ -4,11 +4,27 @@ public class BallGameDTO {
 
 	private Long id;
 	private Long hostId;
+	private String hostName;
+	private String guestName;
 	private Long guestId;
 	private int hostPoints;
 	private int guestPoints;
 	private int hostTimeOut;
 	private int guestTimeOut;
+	
+	
+	public String getHostName() {
+		return hostName;
+	}
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+	public String getGuestName() {
+		return guestName;
+	}
+	public void setGuestName(String guestName) {
+		this.guestName = guestName;
+	}
 	public Long getId() {
 		return id;
 	}

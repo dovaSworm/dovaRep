@@ -69,18 +69,18 @@ statisticApp.controller("playersCtrl", function($scope, $http, $location) {
 
 	getTeams();
 
+	var getBallGame = function() {
+		$http.get(baseUrlBallGame + "/" + $scope.ballGame.id).then(
+				function success(res) {
+					$scope.ballGame = res.data;
+					console.log($scope.ballGame.id);
+					console.log($scope.ballGameId);
+				}, function error(data) {
+					alert("Unsuccessful $scope.getBallGame geting.");
+				});
+		
+	};
 });
-var getBallGame = function() {
-	$http.get(baseUrlBallGame + "/" + $scope.ballGame.id).then(
-			function success(res) {
-				$scope.ballGame = res.data;
-				console.log($scope.ballGame.id);
-				console.log($scope.ballGameId);
-			}, function error(data) {
-				alert("Unsuccessful $scope.getBallGame geting.");
-			});
-	
-};
 // ///////////////////////dodavanje i editovanje
 // igraca/////////////////////////////////////////////
 statisticApp.controller("editAddPlayerCtrl", function($scope, $http,
@@ -119,14 +119,16 @@ statisticApp.controller("editAddPlayerCtrl", function($scope, $http,
 	$scope.totalPages = 1;
 	
 
-	function linkOrController($scope) {
+	
 		
-		$scope.go = function(direction){
+	
+	
+	$(function() {
+		$("#oldPlayer").hover($scope.go = function(direction){
 			$scope.pageNum += direction;
 			getPlayers();
-		}
-	}
-	
+		});
+	})
 
 
 	var getTeams = function() {
@@ -232,11 +234,12 @@ statisticApp.controller("editAddPlayerCtrl", function($scope, $http,
 
 	};
 	
-	$scope.edit = function() {
-		$http.put(baseUrlPlayers + "/" + $scope.oldPlayerId, $scope.newPlayer).then(
+	$scope.editTeam = function() {
+		$http.put(baseUrlTeams + "/" + $scope.oldTeamId, $scope.newTeam ).then(
 					function success(data) {
+						getTeams();
 					alert("Successfull editing!");
-					$location.path("/");
+					$location.path("/edit");
 					}, function error(data) {
 						alert("Unsuccessful editing.");
 					});
@@ -256,6 +259,8 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 	$scope.newBallGame = {};
 	$scope.newBallGame.hostId;
 	$scope.newBallGame.guestId;
+	$scope.newBallGame.hostName;
+	$scope.newBallGame.guestName;
 	$scope.newBallGame.hostPoints = 0;
 	$scope.newBallGame.guestPoints = 0;
 	$scope.newBallGame.hostTimeOut = 3;
@@ -306,11 +311,12 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 
 	$scope.hostFlag;
 	$scope.guestFlag;
+	$scope.flagForTabele = false;
 	
-	$scope.goToGame = function() {
-		getHostPlayers();
-		getGuestPlayers();
-	}
+//	$scope.goToGame = function() {
+//		getHostPlayers();
+//		getGuestPlayers();
+//	}
 
 	var getTeams = function() {
 		$http.get(baseUrlTeams).then(function(res) {
@@ -322,7 +328,9 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 	getTeams();
 
 	$scope.flagCreatedGame = false;
-
+	$scope.newBallGame.hostName;
+	$scope.newBallGame.guestName;
+	
 	$scope.addGame = function() {
 		$scope.newBallGame.hostId = $scope.hostTeamId;
 		$scope.newBallGame.guestId = $scope.guestTeamId;
@@ -338,10 +346,14 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 					$scope.newBallGame.guestTimeOut;
 					$scope.newBallGame.date;
 					$scope.flagCreatedGame = true;
+					getHostPlayers();
+					getGuestPlayers();
 				}, function error(res) {
 					alert("Unsuccessful $scope.addGame!");
 				});
 	};
+	
+	$
 
 	var result = function() {
 		$http.get(baseUrlBallGame + "/result/" + $scope.ballGame.id).then(
@@ -363,8 +375,20 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 					getHostPlayers();
 					getGuestPlayers();
 					$scope.forAlert = true;
+					$scope.playerForUndo = [];
+					$('#btnReset').html('success!!').attr('class',
+					'btn btn-success');
+					setTimeout(function() {
+						$('#btnReset').html('Undo Last').attr('class',
+								'btn btn-danger');
+					}, 2000);
 				}, function error(data) {
-					alert("Unsuccessful editing.");
+					setTimeout(function() {
+						$('#btnReset').html('Undo Last').attr('class',
+						'btn btn-danger');
+					}, 2000);
+					$('#btnReset').html('Nothing to undo').attr('class',
+					'btn btn-info');
 				});
 	}
 	
@@ -384,44 +408,49 @@ statisticApp.controller("statisticCtrl", function($scope, $http, $routeParams,
 					getHostPlayers();
 					getGuestPlayers();
 				}, function error(res) {
-					alert("Unsuccessful!");
+					alert("Unsuccessful change")
 				});
 		
 	}
 	
 //===================================================================================================
-	
-	$(document).ready(
-			function() {
-				$('#btnReset').click(
-						function() {
-							$('#myAlert').show('fade');
-							$('#btnReset').html('success!!').attr('class',
-									'btn btn-success');
-							setTimeout(function() {
-								$('#myAlert').hide('fade');
-							}, 2000)
-							setInterval(function() {
-								$('#btnReset').html('Undo Last').attr('class',
-										'btn btn-danger');
-							}, 2000);
-						});
-
-			});
+//	$(document).ready(
+//			function() {
+//				$('#btnReset').click(
+//						function() {
+//							if($scope.forAlert == false){
+//								
+//								$('#myAlert').show('fade');
+//								$('#btnReset').html('success!!').attr('class',
+//								'btn btn-success');
+//							}
+//							setTimeout(function() {
+//								$('#myAlert').hide('fade');
+//							}, 2000)
+//							setInterval(function() {
+//								$('#btnReset').html('Undo Last').attr('class',
+//										'btn btn-danger');
+//							}, 2000);
+//						});
+//
+//			});
 
 	$(function(){
 		$("#addGameButton").click(function(){
 			$scope.hideGoToGame = true;
-			$("#forCreateButton").click(function(){
-				$scope.hideGoToGame = false;
-			})
+			$("#divController").removeClass("divControllerClass");
+			$scope.hideGoToGame = false;
 		}
 		)
 	})
+	
+	
 	$(function() {
 		$("body").tooltip({
 			selector : '[data-toggle="tooltip"]',
 			container : 'body'
 		});
 	})
+	
+	
 });

@@ -1,48 +1,123 @@
-.tooltip {
-    position: absolute;
-    display: inline-block;
-     width: 160px;
+
+#addGameButton{
+	background: url("/assets/img/duel.png");
+	background-size: 150px 150px;
+	background-repeat: no-repeat;
+	width:150px;
+	height: 150px;
+	position:relative;
+	border-radius: 50%;
 }
 
-#addGameButton{background-color: #00ff80;}
-
-#experiment {
-	height:1000px;
-	width: 100px;
+ #leftBanner {
+ 	top:50px;
+	height:885px;
+	width: 380px;
 	position: absolute;
-	left:2px;
-	border: 3px solid black;
-	background: url("/assets/img/vertikalna_uzarena.jpg");
-	background-size: contain;
-	background-color: #ffff00;}
-#teamHost { width: 100px;
+	left:0px;
+	background: url("/assets/img/igrac4000.png");
+	background-size: cover;
+	background-color: #ffff00;
+	opacity: 0.09;
+	z-index:1;
+} 
+ #rightBanner {
+ 	top:50px;
+	height:885px;
+	width: 380px;
+	position: absolute;
+	right:0px;
+	background: url("/assets/img/mojsut.jpg");
+	background-size: cover;
+	background-color: #ffff00;
+	opacity: 0.09;
+	z-index:1;
+} 
+#teamNameHeaderHost {
+	width: 150px; 
+	hight: 25px;
+	font-size: 20px;
+}
+#teamNameHeaderGuest {
+	position:relative;
+	width: 150px; 
+	hight: 25px;
+	font-size: 20px;
+	left: 1050px;
+}
 
+#forBackground {
+	background-color: #ffffff;
+	
+}
+
+#startGame {
+	position: relative;
+	top: 230px;
+	left:100px;
+}
+#divGuest{
+	right: 106px;
 }
 #divHost{
-	background: url("/assets/img/koza_krupnije.jpg");
+	left: 105px;
 }
-#teamGuest { width: 100px;background: url("/assets/img/koza_krupnije.jpg");}
-#proba{
+
+#teamHost {
+	color: white;
+	background: url("/assets/img/kozalopte.jpg");
+	background-size: 150px 150px;
+	width:150px;
+	height: 151px;
+	border-radius: 50%;
+	background-color: #ff8040;
+}
+
+#teamGuest {
+	background: url("/assets/img/kozalopte.jpg");
+	background-size: 150px 150px;
+	color: white;
+	width:150px;
+	height: 151px;
+	border-radius: 50%;
+	background-color: #ff8040;
+}
+#teamGuestName{
+	position: relative;
+	left: 600px;
+}
+
+#my-btn {
 	padding: 1px 1px;
 	font-size: 11px;
 	line-height: 12px;
 	width: 30px;
 }
-#myAlert{
-	position: absolute;
+
+#scoreButton {
+	background-color: #000000;
+	font-size: 20px;
+	color: #ff8000;
 }
-#reset{
+
+#divReset {
+	width: auto;
 	position: relative;
-	right: 300px;
-	display: inline-block;
 	left: 100px;
-	
 }
-#result{
-	border: 3px solid black;
-	position: absolute;
+
+#resultTabel {
+	position: relative;
 }
-#proba1{
+
+#result {
+	font-size: 40px;
+	position: relative;
+	left: 300px;
+	padding: 2px;
+}
+
+#my-btn1 {
 	padding: 1px 1px;
 	font-size: 11px;
 	line-height: 12px;
@@ -50,78 +125,133 @@
 	color: black;
 	background-color: #ffff00;
 }
-#forHostTable{
+
+#resultId {
+	hight: 50px;
+}
+
+.divControllerClass{
+	position: relative;
+	z-index: 1;
+	background: url("/assets/img/back6.jpg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 800px;
+	top:50px;
+}
+/*    add and edit page    */
+
+.my-input{
+	width: 180px;
+	
+}
+#sectionTeam{
+	position: realtive;
+	width: 45%;
+	top: 100px;	
+	
+}
+#sectionPlayer{
+	position: realtive;
+	top: 100px;
+	width: 45%;
+}
+#playerEditHeader{
+	
+	display: inline;
+	width: auto;
+	position: realtive;
+}
+#teamEditHeader{
+	
+	display: inline;
+	width: auto;
+	position: realative;
+}
+#forTeamForm {
+	border-radius: 5px;
+	background: url("/assets/img/team500.png");
+	background-size: cover;
+	background-repeat:no-repeat;
+	position: realtive;
 	
 }
 
-#forTeamForm{
-	left: 350px;
-	width: 300px;
-	position: relative;
-}
-#forPlayerForm{
-	left: 350px;
-	top: 50px;
-	width: 300px;
-	position: absolute;
-}
-#forHeader{
-	height:50px;
-	background: url("/assets/img/lopta_plamen_crnobelo.jpg");
-	background-size: contain;
-    background-repeat: repeat;
-     text-align: center;
-     font-size: 40px;
+#forPlayerForm {
+	border-radius: 5px;
+	background: url("/assets/img/make.jpg");
+	position: realtive;
 }
 
-#mytable >tbody>tr>td{
-  height:15px;
-  padding:2px;
-  text-align: center;
+
+body{
+  height:auto;
+  width:auto; 
+}
+body::after {
+  content: "";
+  background: url("/assets/img/koza_krupnije.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  opacity: 0.9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
-#mytable >thead>tr>th{
-  height:15px;
-  padding:1px 1px;
-  text-align: center;
+#mytable>tbody>tr>td {
+	height: 15px;
+	padding: 2px;
+	text-align: center;
 }
+
+#mytable>thead>tr>th {
+	height: 15px;
+	padding: 1px 1px;
+	text-align: center;
+}
+
+
 
 /* Tooltip text */
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-
-    /* Position the tooltip text */
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -60px;
-
-    /* Fade in tooltip */
-    opacity: 0;
-    transition: opacity 0.3s;
+	visibility: hidden;
+	width: 160px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 6px;
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	/* Fade in tooltip */
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 
 /* Tooltip arrow */
 .tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
+
+

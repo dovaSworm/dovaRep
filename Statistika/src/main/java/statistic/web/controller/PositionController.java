@@ -23,7 +23,7 @@ import statistic.web.dto.PositionDTO;
 public class PositionController {
 		
 		@Autowired
-		private PositionService pSer;
+		private PositionService positionService;
 		@Autowired
 		private PositionToDTO toDTO;
 		@Autowired
@@ -31,14 +31,14 @@ public class PositionController {
 		
 		@RequestMapping(method=RequestMethod.GET)
 		public ResponseEntity<List<PositionDTO>> get(){
-			return new ResponseEntity<>(toDTO.convert(pSer.findAll()),HttpStatus.OK);
+			return new ResponseEntity<>(toDTO.convert(positionService.findAll()),HttpStatus.OK);
 		}
 		
 		@RequestMapping(value="/{id}", method=RequestMethod.GET)
 		public ResponseEntity<PositionDTO> get(
 				@PathVariable Long id){
 			
-			PlayingPosition p = pSer.findOne(id);
+			PlayingPosition p = positionService.findOne(id);
 			
 			if(p == null){
 				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -54,7 +54,7 @@ public class PositionController {
 				@Validated @RequestBody PositionDTO newPosition){
 			
 			PlayingPosition p = toPosition.convert(newPosition); 
-			pSer.save(p);
+			positionService.save(p);
 			
 			return new ResponseEntity<>(toDTO.convert(p),
 					HttpStatus.CREATED);
@@ -64,14 +64,14 @@ public class PositionController {
 				value="/{id}")
 		public ResponseEntity<PositionDTO> edit(
 				@PathVariable Long id,
-				@Validated @RequestBody PositionDTO izmenjen){
+				@Validated @RequestBody PositionDTO edited){
 			
-			if(!id.equals(izmenjen.getId())){
+			if(!id.equals(edited.getId())){
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 			
-			PlayingPosition p = toPosition.convert(izmenjen); 
-			pSer.save(p);
+			PlayingPosition p = toPosition.convert(edited); 
+			positionService.save(p);
 			
 			return new ResponseEntity<>(toDTO.convert(p),
 					HttpStatus.OK);
@@ -80,7 +80,7 @@ public class PositionController {
 		@RequestMapping(method=RequestMethod.DELETE,
 				value="/{id}")
 		public ResponseEntity<PositionDTO> delete(@PathVariable Long id){
-			pSer.delete(id);
+			positionService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		

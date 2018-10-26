@@ -1,16 +1,13 @@
 package statistic.support;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.ls.LSInput;
 
 import statistic.model.BallGame;
-import statistic.model.PlayerInGame;
 import statistic.model.Team;
 import statistic.service.BallGameService;
 import statistic.service.TeamService;

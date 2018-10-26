@@ -23,7 +23,7 @@ import statistic.web.dto.BallGameDTO;
 public class BallGameController {
 
 	@Autowired
-	private BallGameService bgS;
+	private BallGameService ballgameService;
 	@Autowired
 	private BallGameToDTO toDTO;
 	@Autowired
@@ -31,18 +31,17 @@ public class BallGameController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<BallGameDTO>> get() {
-		return new ResponseEntity<>(toDTO.convert(bgS.findAll()), HttpStatus.OK);
+		return new ResponseEntity<>(toDTO.convert(ballgameService.findAll()), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<BallGameDTO> get(@PathVariable Long id) {
 
-		BallGame bg = bgS.findOne(id);
+		BallGame bg = ballgameService.findOne(id);
 		if (bg == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
-		System.out.println(bg.getHost().getId());
 		return new ResponseEntity<>(toDTO.convert(bg), HttpStatus.OK);
 	}
 
@@ -50,8 +49,7 @@ public class BallGameController {
 	public ResponseEntity<BallGameDTO> add(@Validated @RequestBody BallGameDTO newBallGame) {
 
 		BallGame bg = toGame.convert(newBallGame);
-//		bgS.addPlayersToList(bg);
-		BallGame saved = bgS.save(bg);
+		BallGame saved = ballgameService.save(bg);
 		if(saved == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -60,34 +58,33 @@ public class BallGameController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	public ResponseEntity<BallGameDTO> edit(@PathVariable Long id, @Validated @RequestBody BallGameDTO izmenjen) {
+	public ResponseEntity<BallGameDTO> edit(@PathVariable Long id, @Validated @RequestBody BallGameDTO edited) {
 
-		if (!id.equals(izmenjen.getId())) {
+		if (!id.equals(edited.getId())) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
-		BallGame bg = toGame.convert(izmenjen);
-		bgS.save(bg);
+		BallGame bg = toGame.convert(edited);
+		ballgameService.save(bg);
 
 		return new ResponseEntity<>(toDTO.convert(bg), HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<BallGameDTO> delete(@PathVariable Long id) {
-		bgS.delete(id);
+		ballgameService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/result/{id}")
 	public ResponseEntity<BallGameDTO> result(@PathVariable Long id) {
-		BallGame bg = bgS.result(id);
+		BallGame bg = ballgameService.result(id);
 		return new ResponseEntity<>(toDTO.convert(bg), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/timeOut?{id}")
 	public ResponseEntity<BallGameDTO> result(@PathVariable Long id, @PathVariable Long teamId) {
-		BallGame bg = bgS.timeOut(id, teamId);
-//		url = new URL("http://10.0.2.2:8080/HelloServlet/PDRS?param1="+lat+"&param2="+lon
+		BallGame bg = ballgameService.timeOut(id, teamId);
 		return new ResponseEntity<>(toDTO.convert(bg), HttpStatus.NO_CONTENT);
 	}
 

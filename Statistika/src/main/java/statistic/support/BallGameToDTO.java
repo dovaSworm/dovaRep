@@ -23,7 +23,8 @@ public class BallGameToDTO implements Converter<BallGame, BallGameDTO> {
 		dto.setHostPoints(bg.getHostPoints());
 		dto.setHostTimeOut(bg.getHostTimeOut());
 		dto.setGuestTimeOut(bg.getGuestTimeOut());
-
+		dto.setGuestName(bg.getGuest().getName());
+		dto.setHostName(bg.getHost().getName());
 		return dto;
 	}
 	

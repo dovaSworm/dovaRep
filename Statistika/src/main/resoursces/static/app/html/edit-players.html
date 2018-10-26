@@ -1,76 +1,94 @@
 <div ng-controller="editAddPlayerCtrl">
-<div id="forHeader"></div>
-	<div id="forPlayerForm">
 
-		<form>
-			<h2>Add new or edit player</h2>
+	<section id="sectionPlayer"  class="col-sm-6" >
+	
+		<h2 id="playerEditHeader">Add new or edit player</h2>
+		
+		<div id="forPlayerForm">
+			
 			<div class="form-group">
 				<label for="oldPlayer">Players</label> <select 
-					ng-model="oldPlayerId" class="form-control" id="oldPlayer">
-					<option data-ng-scroll-up="go(1)" data-ng-scroll-down="go(-1)" id="forScroll" ng-repeat="pl in players" value="{{pl.id}}">{{pl.name}}</option>
+					ng-model="oldPlayerId" class="form-control my-input" id="oldPlayer">
+					<option  id="forScroll" ng-repeat="pl in players" value="{{pl.id}}">{{pl.name}}</option>
 				</select>
 				<button type="button" class="btn btn-primary"
 					ng-click="getOldPlayer()">Edit this player</button>
 			</div>
+			
 			<div class="form-group">
-				<label for="name">Name</label> <input class="form-control" id="name"
+				<label for="name">Name</label> <input class="form-control my-input" id="name"
 					ng-model="newPlayer.name">
 			</div>
+			
 			<div class="form-group">
 				<label for="number">Jersey Number</label> <input
-					class="form-control" id="number" ng-model="newPlayer.jerseyNmber">
+					class="form-control my-input" id="number" ng-model="newPlayer.jerseyNmber">
 			</div>
-
+	
 			<div class="form-group">
 				<label for="position">Position</label> <select
-					ng-model="newPlayer.positionId" class="form-control" id="position" autofocus>
+					ng-model="newPlayer.positionId" class="form-control my-input" id="position" autofocus>
 					<option ng-repeat="p in positions" value="{{p.id}}">{{p.name}}</option>
 				</select>
 			</div>
+			
 			<div class="form-group">
 				<label for="team">Team</label> <select ng-model="newPlayer.teamId"
-					class="form-control" id="team">
+					class="form-control my-input" id="team">
 					<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
 				</select>
 			</div>
+			
 			<button type="button" class="btn btn-primary" ng-click="addPlayer()">Add
 				new player</button>
+				
 			<button type="button" class="btn btn-primary" ng-click="edit()">Edit
 				player</button>
-		</form>
+		
+		</div>
+		
+	</section>
 
-	</div>
-	<div id="forTeamForm">
-	<h2>Add new or edit team</h2>
+	<section id="sectionTeam" class="col-sm-6">
 	
-	<div class="form-group">
+		<h2 id="teamEditHeader">Add new or edit team</h2>
+		
+		<div   id="forTeamForm">
+			
+			<div class="form-group">
 				<label for="oldTeam">Teams</label> <select
-					ng-model="oldTeamId" class="form-control" id="oldTeam">
+					ng-model="oldTeamId" class="form-control my-input" id="oldTeam">
 					<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
 				</select>
 				<button type="button" class="btn btn-primary"
 					ng-click="getOldTeam()">Edit this team</button>
 			</div>
-		<div class="form-group">
-			<label for="nameForTeam">Name</label> <input class="form-control"
-				id="nameForTeam" ng-model="newTeam.name">
-		</div>
-		<div class="form-group">
-			<label for="cityForTeam">City</label> <input class="form-control"
-				id="cityForTeam"
-				ng-model="newTeam.city">
-		</div>
-		<div class="form-group">
-			<label for="countryForTeam">Country</label> <input
-				class="form-control" id="countryForTeam" ng-model="newTeam.country">
-		</div>
-		<div class="form-group">
-			<label for="coachForTeam">Coach</label> <input class="form-control"
-				id="coachForTeam" ng-model="newTeam.coach">
-		</div>
-				<br/>
-		<button type="button" class="btn btn-primary" ng-click="addTeam()">Add
-				new team</button>
+			
+			<div class="form-group">
+				<label for="nameForTeam">Name</label> <input class="form-control my-input"
+					id="nameForTeam" ng-model="newTeam.name">
+			</div>
+			
+			<div class="form-group">
+				<label for="cityForTeam">City</label> <input class="form-control my-input"
+					id="cityForTeam"
+					ng-model="newTeam.city">
+			</div>
+			
+			<div class="form-group">
+				<label for="countryForTeam">Country</label> <input
+					class="form-control my-input" id="countryForTeam" ng-model="newTeam.country">
+			</div>
+			
+			<div class="form-group">
+				<label for="coachForTeam">Coach</label> <input class="form-control my-input"
+					id="coachForTeam" ng-model="newTeam.coach">
+			</div>
+			
+			<button type="button" class="btn btn-primary" ng-click="addTeam()">Add
+					new team</button>
 			<button type="button" class="btn btn-primary" ng-click="editTeam()">Edit
-				Team</button>
-	</div>
+					Team</button>
+		</div>
+	</section>
+</div>

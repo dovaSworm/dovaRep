@@ -73,7 +73,7 @@ public class PlayerInGameServiceImpl implements PlayerInGameService {
 		} else if (action.equals("threePointScore")) {
 			p.setThreePointShot((p.getThreePointShot() + 1));
 			p.setThreePointScore((p.getThreePointScore() + 1));
-			p.setTotalPoints(p.getTotalPoints() + 2);
+			p.setTotalPoints(p.getTotalPoints() + 3);
 			inGameR.save(p);
 		} else if (action.equals("steal")) {
 			p.setSteal((p.getSteal() + 1));
@@ -119,15 +119,15 @@ public class PlayerInGameServiceImpl implements PlayerInGameService {
 		BallGame bg = bgR.findOne(gameId);
 		if (bg.getHost().getId() == teamId) {
 			players = inGameR.findByTeamIdAndGameId(teamId, gameId);
-			System.out.println(players.size() + "players by team id");
+//			System.out.println(players.size() + "players by team id");
 			returnList = players.stream().filter(player -> teamId.equals(player.getPlayer().getTeam().getId()))
 					.collect(Collectors.toList());
-			System.out.println(returnList.size() + "host by team id");
+//			System.out.println(returnList.size() + "host by team id");
 		} else if (teamId == bg.getGuest().getId()) {
 			players = inGameR.findByTeamIdAndGameId(teamId, gameId);
 			returnList = players.stream().filter(player -> teamId.equals(player.getPlayer().getTeam().getId()))
 					.collect(Collectors.toList());
-			System.out.println(returnList.size() + "guest by team id");
+//			System.out.println(returnList.size() + "guest by team id");
 		} else {
 			return null;
 		}

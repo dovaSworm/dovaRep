@@ -34,7 +34,7 @@ public class TestData {
 	PlayingPosition c = new PlayingPosition();
 	c.setName("centar");
 	poS.save(c);
-	for(int i = 1; i < 3; i++) {
+	for(int i = 1; i < 6; i++) {
 		Team t1 = new Team();
 		t1.setName("tim " + i);
 		t1.setCity("grad "+ i);

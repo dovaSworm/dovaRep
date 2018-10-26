@@ -1,52 +1,40 @@
-<div ng-controller="statisticCtrl">
-<div id="experiment"></div>
+<div  ng-controller="statisticCtrl">
+      <div id="leftBanner"></div>
+      <div id="rightBanner"></div>    
 
 <!-- <div id="myAlert" class="alert alert-success collapse">
 					<a id="hrefClose" href="#" class="close">&times;</a> <strong>Succsesiful
 						reset</strong>
-				</div>-->
-	<table >
-	<div id="forHeader">STATISTIC</div>
-		<form>
-			<tr>
-				<td>
-					<div id="divHost" ng-hide="flagCreatedGame" class="form-group">
-						<label for="hostPlayers">Team Host</label> <select 
-							ng-model="hostTeamId" class="form-control" id="teamHost" autofocus>
-							<option ng-repeat="t in teams"  value="{{t.id}}">{{t.name}}</option>
-						</select>
-					</div>
+				</div>
+				<span id="playSign" class="glyphicon glyphicon-play"></span> -->
+<div id="divController" class="divControllerClass">
 
+	<section id="startGame">
+		<div class="col-sm-4" id="divHost" ng-hide="flagCreatedGame" class="form-group">
+			<label for="teamHost">Team Host</label> <select data-spy="scroll" data-target=".form-group"
+				ng-model="hostTeamId" class="form-control" id="teamHost">
+				<option ng-repeat="t in teams"  value="{{t.id}}">{{t.name}}</option>
+			</select>
+		</div>
+	
+		<div class="col-sm-4" id="divAddGameButton" ng-hide="flagCreatedGame" class="form-group">
+			<label align="center" for="addGameButton">Start new
+				game</label>
+			<button class="form-control" id="addGameButton"
+				ng-click="addGame()" type="button" class="btn btn-primary"> </button>
+		</div>
 
-				</td>
-				<td>
-					<div ng-hide="flagCreatedGame" class="form-group">
-						<label for="guestTeam">Team Guest</label> <select  
-							ng-model="guestTeamId" class="form-control" id="teamGuest" autofocus>
-							<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
-						</select>
-					</div>
-				</td>
-				<td>
-					<div ng-hide="flagCreatedGame" class="form-group">
-						<label for="addGameButton">Do you want to create a new
-							game?</label>
-						<button class="form-control" id="addGameButton"
-							ng-click="addGame()" type="button" class="btn btn-primary">Create
-							new game</button>
-					</div>
-				</td>
-			</tr>
-			<td><div >
-					<button id="forCreateButton" ng-show="hideGoToGame" ng-click="goToGame()" type="button" class="btn btn-primary">Go
-						To Game</button>
-				</div></td>
-
-		</form>
-		
-	</table>
-	<br> <br /> <br /> 
-	<div ng-show="flagCreatedGame" id="forHostTable">Host
+		<div class="col-sm-4" id="divGuest" ng-hide="flagCreatedGame" class="form-group">
+			<label for="teamGuest">Team Guest</label><select title="Team Guest" 
+				ng-model="guestTeamId" class="form-control" id="teamGuest">
+				<option ng-repeat="t in teams" value="{{t.id}}">{{t.name}}</option>
+			</select>
+		</div>
+	</section>
+	<br> 
+	<div ng-show="hostFlag" id="teamNameHeaderHost">{{ballGame.hostName}}</div>
+	<div ng-show="hostFlag" id="forBackground">
+	<div ng-show="hostFlag" id="forHostTable">
 	<table id="mytable" class="table table-striped table-bordered">
 		<thead>
 			<tr>
@@ -78,55 +66,57 @@
 rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steals {{p.steal}} rampe {{p.blockShot}}">{{p.name}}</td>
 				<td>{{p.totalPoints}}</td>
 				<td>{{p.positionName}}</td>
-				<td><button id="proba" ng-click="change(p.id, 'onePointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'onePointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">1s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'onePointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'onePointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">1sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'twoPointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'twoPointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">2s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'twoPointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'twoPointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">2sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'threePointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'threePointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">3s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'threePointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'threePointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">3sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'assist')"
+				<td><button id="my-btn" ng-click="change(p.id, 'assist')"
 						class="btn btn-primary" ng-disabled="p.out == true">A</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'off')"
+				<td><button id="my-btn" ng-click="change(p.id, 'off')"
 						title="{{p.reboundOff}}" class="btn btn-basic"
 						ng-disabled="p.out == true">OR</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'def')"
+				<td><button id="my-btn" ng-click="change(p.id, 'def')"
 						title="{{p.reboundDef}}" class="btn btn-default"
 						ng-disabled="p.out == true">DR</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'faul')"
+				<td><button id="my-btn" ng-click="change(p.id, 'faul')"
 						class="btn btn-danger" ng-disabled="p.out == true">F</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'to')"
+				<td><button id="my-btn" ng-click="change(p.id, 'to')"
 						class="btn btn-warning" ng-disabled="p.out == true">TO</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'steal')"
+				<td><button id="my-btn" ng-click="change(p.id, 'steal')"
 						class="btn btn-info" ng-disabled="p.out == true">S</button></td>
-				<td><button id="proba1" ng-click="change(p.id, 'block')"
+				<td><button id="my-btn1" ng-click="change(p.id, 'block')"
 						class="btn btn-info" ng-disabled="p.out == true">B</button></td>
 
 			</tr>
 		</tbody>
 	</table>
 	</div>
-	<div id="result" ng-show="hostFlag && guestFlag" id="resultDiv">
-		<table>
-			<td><button type="button" class="btn btn-primary">{{ballGame.hostPoints}}</button>
-			<td>:
-				<button type="button" class="btn btn-primary">{{ballGame.guestPoints}}</button>
-			</td>
-		</table>
 	</div>
-	<div id="reset">
+		
+	<div id="result" ng-show="hostFlag && guestFlag" >
+		<table id="resultTabel">
+			<td>{{ballGame.hostName}}&nbsp<button id="scoreButton" type="button" class="btn btn-primary">{{ballGame.hostPoints}}</button>
+			:
+				<button type="button" id="scoreButton" class="btn btn-primary">{{ballGame.guestPoints}}</button>&nbsp{{ballGame.guestName}}
+			</td>
+			<td><div id="divReset">
 					<button ng-show="hostFlag && guestFlag" id="btnReset"
 						ng-click="reset()" type="button" class="btn btn-danger">Undo Last</button>
-				</div>
-			
+				</div></td>
+		</table>
+	</div>
 	<br />
-<div id="forGuestTeam" ng-show="flagCreatedGame">
-	 Guest
+	<div  ng-show="guestFlag" id="teamNameHeaderGuest">{{ballGame.guestName}}</div>
+	<div  ng-show="guestFlag" id="forBackground">
+<div id="forGuestTeam" ng-show="guestFlag">
 	<table id="mytable" class="table table-striped table-bordered">
 		<thead>
 			<tr>
@@ -158,39 +148,39 @@ rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steal
 rebounds {{p.totalRebounds}} assists {{p.assist}} turn over {{p.turnOver}} steals {{p.steal}} rampe {{p.blockShot}}">{{p.name}}</td>
 				<td>{{p.totalPoints}}</td>
 				<td>{{p.positionName}}</td>
-				<td><button id="proba" ng-click="change(p.id, 'onePointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'onePointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">1s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'onePointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'onePointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">1sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'twoPointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'twoPointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">2s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'twoPointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'twoPointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">2sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'threePointShot')"
+				<td><button id="my-btn" ng-click="change(p.id, 'threePointShot')"
 						class="btn btn-danger" ng-disabled="p.out == true">3s</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'threePointScore')"
+				<td><button id="my-btn" ng-click="change(p.id, 'threePointScore')"
 						class="btn btn-success" ng-disabled="p.out == true">3sc</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'assist')"
+				<td><button id="my-btn" ng-click="change(p.id, 'assist')"
 						class="btn btn-primary" ng-disabled="p.out == true">A</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'off')"
+				<td><button id="my-btn" ng-click="change(p.id, 'off')"
 						title="{{p.reboundOff}}" class="btn btn-basic"
 						ng-disabled="p.out == true">OR</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'def')"
+				<td><button id="my-btn" ng-click="change(p.id, 'def')"
 						title="{{p.reboundDef}}" class="btn btn-default"
 						ng-disabled="p.out == true">DR</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'faul')"
+				<td><button id="my-btn" ng-click="change(p.id, 'faul')"
 						class="btn btn-danger" ng-disabled="p.out == true">F</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'to')"
+				<td><button id="my-btn" ng-click="change(p.id, 'to')"
 						class="btn btn-warning" ng-disabled="p.out == true">TO</button></td>
-				<td><button id="proba" ng-click="change(p.id, 'steal')"
+				<td><button id="my-btn" ng-click="change(p.id, 'steal')"
 						class="btn btn-info" ng-disabled="p.out == true">S</button></td>
-				<td><button id="proba1" ng-click="change(p.id, 'block')"
+				<td><button id="my-btn1" ng-click="change(p.id, 'block')"
 						class="btn btn-info" ng-disabled="p.out == true">B</button></td>
 
 			</tr>
 		</tbody>
 	</table>
 </div>
-
-	<hr>
+</div>
+</div>
 </div>

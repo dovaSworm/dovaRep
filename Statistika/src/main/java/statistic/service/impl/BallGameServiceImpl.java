@@ -11,7 +11,6 @@ import statistic.model.BallGame;
 import statistic.model.PlayerInGame;
 import statistic.model.Team;
 import statistic.repository.BallGameRepository;
-import statistic.repository.PlayerInGameRepository;
 import statistic.repository.TeamRepositiry;
 import statistic.service.BallGameService;
 import statistic.service.PlayerInGameService;
@@ -22,32 +21,31 @@ import statistic.service.PlayerService;
 public class BallGameServiceImpl implements BallGameService {
 
 	@Autowired
-	private BallGameRepository bgr;
+	private BallGameRepository ballgameRepository;
 	@Autowired
-	private TeamRepositiry tr;
+	private TeamRepositiry teamRepositry;
 	@Autowired
-	private PlayerInGameService inGamS;
+	private PlayerInGameService playerInGameService;
 	@Autowired
-	private PlayerService playerS;
+	private PlayerService playerService;
 
 	@Override
 	public BallGame save(BallGame bg) {
 		// TODO Auto-generated method stub
-		playerS.makePlayersInGame(bg);
-		return bgr.save(bg);
+		playerService.makePlayersInGame(bg);
+		return ballgameRepository.save(bg);
 	}
 
 
 	@Override
 	public BallGame findOne(Long id) {
 		// TODO Auto-generated method stub
-		BallGame bg = bgr.findOne(id);
+		BallGame bg = ballgameRepository.findOne(id);
 		if(bg.getGuestPlayers().isEmpty()) {
-			bg.setGuestPlayers(inGamS.findPlayersInGameByTeamAndGame(bg.getGuest().getId(), id));
+			bg.setGuestPlayers(playerInGameService.findPlayersInGameByTeamAndGame(bg.getGuest().getId(), id));
 		}
 		if(bg.getHostPlayers().isEmpty()) {
-			bg.setHostPlayers(inGamS.findPlayersInGameByTeamAndGame(bg.getHost().getId(), id));
-			System.out.println(bg.getHostPlayers().size() + "u find one");
+			bg.setHostPlayers(playerInGameService.findPlayersInGameByTeamAndGame(bg.getHost().getId(), id));
 		}
 		
 		return bg;
@@ -56,7 +54,7 @@ public class BallGameServiceImpl implements BallGameService {
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		bgr.delete(id);
+		ballgameRepository.delete(id);
 	}
 
 	@Override
@@ -76,12 +74,12 @@ public class BallGameServiceImpl implements BallGameService {
 	@Override
 	public BallGame timeOut(Long gameId, Long teamId) {
 
-		BallGame bg = bgr.findOne(gameId);
-		Team t = tr.findOne(teamId);
+		BallGame bg = ballgameRepository.findOne(gameId);
+		Team t = teamRepositry.findOne(teamId);
 		if (t.equals(bg.getGuest())) {
 			bg.setGuestTimeOut(bg.getGuestTimeOut() - 1);
 		} else {
-			bg.setGuestTimeOut(bg.getHostTimeOut() - 1);
+			bg.setHostTimeOut(bg.getHostTimeOut() - 1);
 		}
 		return bg;
 	}
@@ -89,6 +87,6 @@ public class BallGameServiceImpl implements BallGameService {
 	@Override
 	public List<BallGame> findAll() {
 		// TODO Auto-generated method stub
-		return bgr.findAll();
+		return ballgameRepository.findAll();
 	}
 }
