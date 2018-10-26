@@ -3,7 +3,7 @@
 # Statictic for basketball game. CRUD operations on players, teams and games. Changing player statistics trough javacsript UI. Javascript framework is AngularJS. Saving records for all games in database(MySQL) with hibernate. UI enrichment with JQuery and bootstrap.
 # Single page application. Maven build tool, framework spring boot , mvc patern.
 
-# Model:
+Model:
 
 @Entity
 @Table
@@ -79,7 +79,7 @@ public class PlayerInGame {
 	private boolean onRoster = true;
    //geters and setters
 }
-# View:
+View:
 public class PlayerDTO {
 
 	private Long id;
